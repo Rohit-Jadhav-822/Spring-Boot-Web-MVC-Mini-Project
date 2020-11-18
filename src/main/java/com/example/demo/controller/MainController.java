@@ -21,7 +21,7 @@ public class MainController {
 
 	@GetMapping("/registerEmployee")
 	public String getRegistrationForm() { 
-		return "employeeRegForm";
+		return "employeeRegForm";   
 	}
 	
 	@PostMapping("/addEmployee")
