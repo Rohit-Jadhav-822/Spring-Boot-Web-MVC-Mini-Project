@@ -12,4 +12,6 @@ public interface EmployeeService {
 	
 	public void deleteEmployee(Integer id);
 	
+	public Boolean employeeExistByID(Integer id);
+	
 }

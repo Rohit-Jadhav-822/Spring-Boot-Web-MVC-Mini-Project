@@ -27,7 +27,6 @@
 			<td>${emp.addr}</td>
 			<td>${emp.hra}</td>
 			<td>${emp.da}</td>
-			<td><a href="/DeleteEmployee?id=${emp.eid}">Delete</a></td>
 		</tr>
 	
 	</c:forEach>

@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.example.demo.exception.EmployeeNotFoundException;
 import com.example.demo.model.Employee;
 import com.example.demo.service.EmployeeService;
 
@@ -38,11 +39,20 @@ public class MainController {
 		return "EmployeeList";
 	}
 	
-	
+	/**
+	 * Delete Operation with Exception handling.
+	 * @param id
+	 * @param model
+	 * @return
+	 */
 	@GetMapping("/DeleteEmployee")
 	public String deleteEmployee(@RequestParam Integer id, Model model) { 
+		
+		if(!employeeService.employeeExistByID(id)) {
+			throw new EmployeeNotFoundException("Employee not exists with id " + id);
+		}
+		
 		employeeService.deleteEmployee(id);
-		model.addAttribute("message", "Employee Deleted with Id:" + id);
 		return "redirect:getEmployees";
 	}
 	

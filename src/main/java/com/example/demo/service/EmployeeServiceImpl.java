@@ -31,4 +31,12 @@ public class EmployeeServiceImpl implements EmployeeService {
 		employeeRepository.deleteById(id);
 	}
 
+	@Override
+	public Boolean employeeExistByID(Integer id) {
+		return employeeRepository.existsById(id);
+	}
+	
+
+
+
 }
