@@ -3,6 +3,8 @@ package com.example.demo.service;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Component;
 
 import com.example.demo.model.Employee;
@@ -35,8 +37,14 @@ public class EmployeeServiceImpl implements EmployeeService {
 	public Boolean employeeExistByID(Integer id) {
 		return employeeRepository.existsById(id);
 	}
+
+	/**
+	 * fetch employees data using pagination
+	 */
+	@Override
+	public Page<Employee> getAllEmployees(Pageable pageable) {
+		return employeeRepository.findAll(pageable);
+	}
 	
-
-
 
 }

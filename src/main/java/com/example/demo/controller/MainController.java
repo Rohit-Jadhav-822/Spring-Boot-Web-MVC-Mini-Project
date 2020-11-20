@@ -3,6 +3,9 @@ package com.example.demo.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -32,10 +35,23 @@ public class MainController {
 		return "employeeRegForm";
 	}
 	
+	/*
+	 * @GetMapping("/getEmployees") public String getEmployees(Model model) {
+	 * List<Employee> employees = employeeService.getAllEmployees();
+	 * model.addAttribute("empList", employees); return "EmployeeList"; }
+	 */
+	/**
+	 * fetch employees data using pagination.
+	 * @PageableDefault used to set default pagination values when not passed in request.
+	 * @param model
+	 * @return
+	 */
 	@GetMapping("/getEmployees")
-	public String getEmployees(Model model) { 
-		List<Employee> employees = employeeService.getAllEmployees();
-		model.addAttribute("empList", employees);
+	public String getEmployees(@PageableDefault(page = 0, size = 2) Pageable pageable, Model model) { 
+		
+		Page<Employee> employeePage = employeeService.getAllEmployees(pageable);
+		model.addAttribute("page", employeePage);
+		model.addAttribute("empList", employeePage.getContent());
 		return "EmployeeList";
 	}
 	
